@@ -1,7 +1,7 @@
 import ContactList from "./components/ContactList/ContactList";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SerchBox from "./components/SerchBox/SerchBox";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const App = () => {
   const myContact = [
