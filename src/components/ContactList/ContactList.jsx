@@ -1,12 +1,11 @@
-
-const ContactList = ({}) => {
+import Contact from "../Contact/Contact"
+const ContactList = ({myContact}) => {
     return (
-
-        <div>
-         
-</div>
-
-
+         <ul>
+            {myContact.map(item => (
+                < Contact key = { item.id } { ...item } />
+        ))}
+      </ul>
    )
    
 }

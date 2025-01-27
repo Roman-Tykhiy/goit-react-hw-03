@@ -1,9 +1,14 @@
 
 
 
-const SerchBox = ({results, total, positive}) => {
-  return <div >
+const SerchBox = ({serchValue}) => {
+  return (
+    <>
+      <p>Find contacts by name</p>
+      <input name="name" onChange={serchValue} />
+    </>
     
-</div>
+  )
+
 }
 export default SerchBox;
