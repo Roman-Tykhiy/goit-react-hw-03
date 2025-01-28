@@ -1,18 +1,16 @@
 import { Field, Form, Formik } from "formik";
-const ContactForm = () => {
+const ContactForm = ({ handleSubmit}) => {
     const initialValues = {
         name: "",
+        phone: "",
     };
-    const handleSubmit = (values, actions) => {
-        console.log(values);
-        actions.resetForm();
-        
-    }
+    
     return (
         <div>
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                 <Form>
                     <Field name="name"></Field>
+                    <Field name="phone"></Field>
                     <button type="submit">Add contact</button>
                 </Form>
             </Formik>
@@ -22,5 +20,4 @@ const ContactForm = () => {
    )
    
 }
-
 export default ContactForm;

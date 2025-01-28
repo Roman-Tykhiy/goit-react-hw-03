@@ -1,6 +1,6 @@
 
 
-const Contact = ( { name, number, id}) => {
+const Contact = ( { name, number, id, handleDelete}) => {
     return (        
         <li>
             <div>

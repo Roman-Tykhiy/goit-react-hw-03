@@ -1,7 +1,8 @@
 import ContactList from "./components/ContactList/ContactList";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SerchBox from "./components/SerchBox/SerchBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 
 const App = () => {
   const myContact = [
@@ -15,17 +16,37 @@ const App = () => {
   const serchValue = (e) => { 
     setValue(e.target.value.trim())
   };
-  const filterContact = myContact.filter(e => {
+ 
+  const [contacts, setContacts] = useState(() => {
+    const storedContacts = localStorage.getItem("saveList");
+    return storedContacts ? JSON.parse(storedContacts) : myContact;
+  });
+  useEffect(() => {
+    localStorage.setItem("saveList", JSON.stringify(contacts));
+  }, [contacts]);
+  const handleSubmit = (values, actions) => {
+    actions.resetForm();
+    const newContact = {
+      id: crypto.randomUUID(),
+      name: values.name,
+      number: values.phone
+    }
+    setContacts(prev => [...prev, newContact])
+  };
+   const filterContact = contacts.filter(e => {
     return e.name.toLowerCase().includes(value.toLowerCase())
   });
-
+  const handleDelete = (id => {
+    const newList = contacts.filter(item => item.id !== id);
+    setContacts(newList)
+  })
   return (
     
     <>
       <h1>Phonebook</h1>
-      <ContactForm />
+      <ContactForm handleSubmit={handleSubmit}/>
       <SerchBox serchValue={serchValue} />
-      <ContactList myContact={filterContact} />
+      <ContactList myContact={filterContact} handleDelete={handleDelete} />
     
     </>
   ) 
