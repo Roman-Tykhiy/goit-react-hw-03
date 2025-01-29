@@ -2,7 +2,7 @@ import ContactList from "./components/ContactList/ContactList";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SerchBox from "./components/SerchBox/SerchBox";
 import { useEffect, useState } from "react";
-
+import s from "./components/App.module.css"
 
 const App = () => {
   const myContact = [
@@ -40,13 +40,17 @@ const App = () => {
     const newList = contacts.filter(item => item.id !== id);
     setContacts(newList)
   })
+  const noContact = "No contacts. Please add a new contact";
+  
   return (
-    
     <>
-      <h1>Phonebook</h1>
+      <div className={s.Form}>
+       <h1 className={s.Title}>Phonebook</h1>
       <ContactForm handleSubmit={handleSubmit}/>
-      <SerchBox serchValue={serchValue} />
-      <ContactList myContact={filterContact} handleDelete={handleDelete} />
+      {contacts.length === 0 ? ("") : <SerchBox serchValue={serchValue}/>}
+        {contacts.length === 0 ? (<span className={s.messege}>{noContact}</span>) : <ContactList myContact={filterContact} handleDelete={handleDelete}/>}
+      </div>
+      
     
     </>
   ) 
